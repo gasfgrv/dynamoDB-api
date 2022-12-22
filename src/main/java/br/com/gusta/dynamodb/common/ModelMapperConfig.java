@@ -22,7 +22,7 @@ public class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {
-        log.info("Creating bean ModelMapper");
+        LOGGER.info("Creating bean ModelMapper");
 
         var mapper = new ModelMapper();
 

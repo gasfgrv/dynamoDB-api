@@ -19,7 +19,7 @@ public class EmployeeService {
     public Employee save(Employee employee) {
         employeeRepository.save(employee);
 
-        log.info("Employee {} was saved in DynamoDB", employee.getEmployeeId());
+        LOGGER.info("Employee {} was saved in DynamoDB", employee.getEmployeeId());
 
         return employee;
     }
@@ -36,7 +36,7 @@ public class EmployeeService {
 
         employeeRepository.delete(employee);
 
-        log.info("Employee {} was deleted data in DynamoDB", employee.getEmployeeId());
+        LOGGER.info("Employee {} was deleted data in DynamoDB", employee.getEmployeeId());
     }
 
     public Employee update(String employeeId, Employee employee) {
@@ -46,7 +46,7 @@ public class EmployeeService {
 
         employeeRepository.update(employeeId, employee);
 
-        log.info("Employee {} was update data in DynamoDB", employee.getEmployeeId());
+        LOGGER.info("Employee {} was update data in DynamoDB", employee.getEmployeeId());
 
         return employee;
     }

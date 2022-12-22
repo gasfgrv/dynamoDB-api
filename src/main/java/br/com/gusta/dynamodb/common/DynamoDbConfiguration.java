@@ -28,7 +28,7 @@ public class DynamoDbConfiguration {
 
     @Bean
     public DynamoDBMapper dynamoDBMapper() {
-        log.info("Creating bean DynamoDBMapper for service endpoint: {} and signing region: {}",
+        LOGGER.info("Creating bean DynamoDBMapper for service endpoint: {} and signing region: {}",
                 serviceEndpoint,
                 signingRegion);
 

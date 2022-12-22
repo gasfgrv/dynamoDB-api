@@ -2,6 +2,7 @@ package br.com.gusta.dynamodb.api.exceptionhandler;
 
 import br.com.gusta.dynamodb.domain.exception.EmployeeException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+@Slf4j
 @ControllerAdvice
 @RequiredArgsConstructor
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
@@ -28,6 +30,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatus status,
                                                                   WebRequest request) {
+
+        LOGGER.error("Error processing the request: " + request, ex);
 
         var fields = new ArrayList<Problem.Field>();
 
@@ -54,6 +58,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         problem.setStatus(status.value());
         problem.setDateTime(LocalDateTime.now());
         problem.setTitle(ex.getMessage());
+
+        LOGGER.error("Error processing the request: " + request, ex);
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }

@@ -37,7 +37,7 @@ public class EmployeeController {
     @ApiOperation(value = "Saves a new employee", notes = "Saves a new employee in dynamoDB")
     @ApiResponse(code = 200, message = "Employee saved", response = Employee.class)
     public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody @ApiParam(value = "Form for creation of user", required = true) EmployeeInput employee) {
-        log.info("Salving employee in dynamoDB");
+        LOGGER.info("Salving employee in dynamoDB");
 
         var employeeEntity = employeeMapper.toEntity(employee);
 
@@ -48,7 +48,7 @@ public class EmployeeController {
     @ApiOperation(value = "Get data of specific employee", notes = "Get data of specific employee in dynamoDB")
     @ApiResponse(code = 200, message = "Data retrived", response = EmployeeDto.class)
     public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
-        log.info("Getting info of employee {} in dynamoDB", employeeId);
+        LOGGER.info("Getting info of employee {} in dynamoDB", employeeId);
 
         var dto = employeeMapper.toDto(employeeService.getEmployeeById(employeeId));
 
@@ -59,7 +59,7 @@ public class EmployeeController {
     @ApiOperation(value = "Deletes specific employee", notes = "Deletes employee in dynamoDB")
     @ApiResponse(code = 204, message = "Employee deleted")
     public ResponseEntity<Void> deleteEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
-        log.info("Deleting info of employee {} in dynamoDB", employeeId);
+        LOGGER.info("Deleting info of employee {} in dynamoDB", employeeId);
 
         var employee = employeeService.getEmployeeById(employeeId);
 
@@ -74,7 +74,7 @@ public class EmployeeController {
     @ApiResponse(code = 200, message = "Employee updated", response = Employee.class)
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId,
                                                    @Valid @RequestBody @ApiParam(value = "Form to update user", required = true) EmployeeInput employee) {
-        log.info("Update info of employee {} in dynamoDB", employeeId);
+        LOGGER.info("Update info of employee {} in dynamoDB", employeeId);
 
         var employeeEntity = employeeMapper.toEntity(employee);
 

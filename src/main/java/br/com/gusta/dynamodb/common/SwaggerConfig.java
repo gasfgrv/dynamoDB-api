@@ -19,7 +19,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     @Bean
     public Docket dynamoDbApi() {
-        log.info("Creating bean Docket");
+        LOGGER.info("Creating bean Docket");
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
@@ -29,7 +29,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     }
 
     private ApiInfo metaData() {
-        log.info("Building API info");
+        LOGGER.info("Building API info");
 
         return new ApiInfoBuilder()
                 .title("DynamoDB API")

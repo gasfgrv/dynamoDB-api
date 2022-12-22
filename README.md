@@ -32,13 +32,13 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
  
 ## Features
 
-[x] Cadastro de dados de funcionários e seus respectivos departamentos
+- [x] Cadastro de dados de funcionários e seus respectivos departamentos
 
-[x] Consulta de dados de funcionários e seus respectivos departamentos
+- [x] Consulta de dados de funcionários e seus respectivos departamentos
 
-[x] Atualização de dados de funcionários e seus respectivos departamentos
+- [x] Atualização de dados de funcionários e seus respectivos departamentos
 
-[x] Exclusão de dados de funcionários e seus respectivos departamentos
+- [x] Exclusão de dados de funcionários e seus respectivos departamentos
 
 ## Endpoints da Aplicação
 

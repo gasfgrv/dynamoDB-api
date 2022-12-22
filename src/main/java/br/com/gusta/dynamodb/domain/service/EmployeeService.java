@@ -17,12 +17,10 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     public Employee save(Employee employee) {
-        if (employeeExists(employee).isPresent()) {
-            throw new EmployeeException("This employee already exists");
-        }
-
         employeeRepository.save(employee);
+
         log.info("Employee {} was saved in DynamoDB", employee.getEmployeeId());
+
         return employee;
     }
 
@@ -37,6 +35,7 @@ public class EmployeeService {
         }
 
         employeeRepository.delete(employee);
+
         log.info("Employee {} was deleted data in DynamoDB", employee.getEmployeeId());
     }
 
@@ -46,16 +45,15 @@ public class EmployeeService {
         }
 
         employeeRepository.update(employeeId, employee);
+
         log.info("Employee {} was update data in DynamoDB", employee.getEmployeeId());
+
         return employee;
     }
 
     private Optional<Employee> employeeExists(Employee employee) {
-        if (employee.getEmployeeId() == null) {
-            return Optional.empty();
-        }
-
         Employee employeeById = employeeRepository.getEmployeeById(employee.getEmployeeId());
+
         return Optional.ofNullable(employeeById);
     }
 

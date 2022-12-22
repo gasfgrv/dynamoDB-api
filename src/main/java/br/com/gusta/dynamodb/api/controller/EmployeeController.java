@@ -3,7 +3,6 @@ package br.com.gusta.dynamodb.api.controller;
 import br.com.gusta.dynamodb.api.mapper.EmployeeMapper;
 import br.com.gusta.dynamodb.api.model.EmployeeDto;
 import br.com.gusta.dynamodb.api.model.EmployeeInput;
-import br.com.gusta.dynamodb.api.model.EmployeeUpdateInput;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import br.com.gusta.dynamodb.domain.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -60,7 +59,7 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") String employeeId,
-                                                   @Valid @RequestBody EmployeeUpdateInput employee) {
+                                                   @Valid @RequestBody EmployeeInput employee) {
         log.info("Update info of employee {} in dynamoDB", employeeId);
 
         var employeeEntity = employeeMapper.toEntity(employee);

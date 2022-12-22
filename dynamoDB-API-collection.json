@@ -1,1 +1,160 @@
-{"_type":"export","__export_format":4,"__export_date":"2022-12-22T12:21:53.612Z","__export_source":"insomnia.desktop.app:v2022.4.0","resources":[{"_id":"req_bf9a93f72f8b4b0a858130684141135c","parentId":"wrk_9ed879361494409480e507ee1d745cc3","modified":1671710654656,"created":1671710621621,"url":"localhost:8080/employee/366ef6f5-a417-48e1-a80f-14e96435c951","name":"deleteEmployee","description":"","method":"DELETE","body":{},"parameters":[],"headers":[],"authentication":{},"metaSortKey":-1671710621621,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"wrk_9ed879361494409480e507ee1d745cc3","parentId":null,"modified":1671707673014,"created":1671707673014,"name":"dynamoDB-API","description":"","scope":"collection","_type":"workspace"},{"_id":"req_7045b02379b94a6e81a16a895cf68538","parentId":"wrk_9ed879361494409480e507ee1d745cc3","modified":1671710647712,"created":1671710392904,"url":"localhost:8080/employee/366ef6f5-a417-48e1-a80f-14e96435c951","name":"updateEmployee","description":"","method":"PUT","body":{"mimeType":"application/json","text":"{\n\t\"employeeId\":\"366ef6f5-a417-48e1-a80f-14e96435c951\",\n\t\"firstName\": \"Gil\",\n\t\"lastName\": \"Gomes\",\n\t\"email\": \"gil.gomes@email.com\",\n\t\"departament\": {\n\t\t\"departamentName\": \"JOURNALIST\",\n\t\t\"departamentCode\": \"DEP_0041\"\n\t}\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json","id":"pair_498e42bc7ebb45179ca3472e2c4f2316"}],"authentication":{},"metaSortKey":-1671710392904,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_8079b49d7028404186eaced7fe2d43df","parentId":"wrk_9ed879361494409480e507ee1d745cc3","modified":1671710366211,"created":1671710331038,"url":"localhost:8080/employee/a735b69d-d6e9-45af-a876-3f3a545ea612","name":"getEmployee","description":"","method":"GET","body":{},"parameters":[],"headers":[],"authentication":{},"metaSortKey":-1671710331038,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_48d5e3f2cec8477db3a12722b45cfb86","parentId":"wrk_9ed879361494409480e507ee1d745cc3","modified":1671710502202,"created":1671707682635,"url":"localhost:8080/employee","name":"saveEmployee","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"firstName\": \"Gustavo\",\n\t\"lastName\": \"Silva\",\n\t\"email\": \"gustavo.silva@email.com\",\n\t\"departament\": {\n\t\t\"departamentName\": \"IT\",\n\t\t\"departamentCode\": \"DEP_0042\"\n\t}\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json","id":"pair_e7aea0da2767424ea970031e678adc72"}],"authentication":{},"metaSortKey":-1671707682636,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"env_c9d69e957f0cd55c059883dc1056ea1aa33f4622","parentId":"wrk_9ed879361494409480e507ee1d745cc3","modified":1671707673041,"created":1671707673041,"name":"Base Environment","data":{},"dataPropertyOrder":null,"color":null,"isPrivate":false,"metaSortKey":1671707673041,"_type":"environment"},{"_id":"jar_c9d69e957f0cd55c059883dc1056ea1aa33f4622","parentId":"wrk_9ed879361494409480e507ee1d745cc3","modified":1671707673043,"created":1671707673043,"name":"Default Jar","cookies":[],"_type":"cookie_jar"},{"_id":"spc_9be5e45159c54183aae275a5658ea061","parentId":"wrk_9ed879361494409480e507ee1d745cc3","modified":1671707673030,"created":1671707673030,"fileName":"dynamoDB-API","contents":"","contentType":"yaml","_type":"api_spec"}]}
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-12-22T12:21:53.612Z",
+  "__export_source": "insomnia.desktop.app:v2022.4.0",
+  "resources": [
+    {
+      "_id": "req_bf9a93f72f8b4b0a858130684141135c",
+      "parentId": "wrk_9ed879361494409480e507ee1d745cc3",
+      "modified": 1671710654656,
+      "created": 1671710621621,
+      "url": "localhost:8080/employee/366ef6f5-a417-48e1-a80f-14e96435c951",
+      "name": "deleteEmployee",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1671710621621,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_9ed879361494409480e507ee1d745cc3",
+      "parentId": null,
+      "modified": 1671707673014,
+      "created": 1671707673014,
+      "name": "dynamoDB-API",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_7045b02379b94a6e81a16a895cf68538",
+      "parentId": "wrk_9ed879361494409480e507ee1d745cc3",
+      "modified": 1671710647712,
+      "created": 1671710392904,
+      "url": "localhost:8080/employee/366ef6f5-a417-48e1-a80f-14e96435c951",
+      "name": "updateEmployee",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"firstName\": \"Gil\",\n\t\"lastName\": \"Gomes\",\n\t\"email\": \"gil.gomes@email.com\",\n\t\"departament\": {\n\t\t\"departamentName\": \"JOURNALIST\",\n\t\t\"departamentCode\": \"DEP_0041\"\n\t}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_498e42bc7ebb45179ca3472e2c4f2316"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1671710392904,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_8079b49d7028404186eaced7fe2d43df",
+      "parentId": "wrk_9ed879361494409480e507ee1d745cc3",
+      "modified": 1671710366211,
+      "created": 1671710331038,
+      "url": "localhost:8080/employee/a735b69d-d6e9-45af-a876-3f3a545ea612",
+      "name": "getEmployee",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1671710331038,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_48d5e3f2cec8477db3a12722b45cfb86",
+      "parentId": "wrk_9ed879361494409480e507ee1d745cc3",
+      "modified": 1671710502202,
+      "created": 1671707682635,
+      "url": "localhost:8080/employee",
+      "name": "saveEmployee",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"firstName\": \"Gustavo\",\n\t\"lastName\": \"Silva\",\n\t\"email\": \"gustavo.silva@email.com\",\n\t\"departament\": {\n\t\t\"departamentName\": \"IT\",\n\t\t\"departamentCode\": \"DEP_0042\"\n\t}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e7aea0da2767424ea970031e678adc72"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1671707682636,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_c9d69e957f0cd55c059883dc1056ea1aa33f4622",
+      "parentId": "wrk_9ed879361494409480e507ee1d745cc3",
+      "modified": 1671707673041,
+      "created": 1671707673041,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1671707673041,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_c9d69e957f0cd55c059883dc1056ea1aa33f4622",
+      "parentId": "wrk_9ed879361494409480e507ee1d745cc3",
+      "modified": 1671707673043,
+      "created": 1671707673043,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_9be5e45159c54183aae275a5658ea061",
+      "parentId": "wrk_9ed879361494409480e507ee1d745cc3",
+      "modified": 1671707673030,
+      "created": 1671707673030,
+      "fileName": "dynamoDB-API",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}

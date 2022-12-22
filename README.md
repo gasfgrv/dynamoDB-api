@@ -321,7 +321,7 @@ docker pull gustosilva/dynamodb-api:latest
 # Gerar o containter
 docker run gustosilva/dynamodb-api:latest -d -p 8080:8080 \
     --env SERVICE_ENDPOINT=[SERVICE_ENDPOINT] \
-    --env SIGNING_REGION=[região];
+    --env SIGNING_REGION=[SIGNING_REGION];
     --env ACCESS_KEY=[ACCESS_KEY];
     --env SECRET_KEY=[SECRET_KEY]
 

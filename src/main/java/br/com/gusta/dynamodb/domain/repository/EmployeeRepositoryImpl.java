@@ -6,6 +6,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ExpectedAttributeValue;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 
@@ -16,22 +18,26 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     private final DynamoDBMapper dynamoDBMapper;
 
     @Override
+    @CacheEvict("employee")
     public Employee save(Employee employee) {
         dynamoDBMapper.save(employee);
         return employee;
     }
 
     @Override
+    @Cacheable("employee")
     public Employee getEmployeeById(String employeeId) {
         return dynamoDBMapper.load(Employee.class, employeeId);
     }
 
     @Override
+    @CacheEvict("employee")
     public void delete(Employee employee) {
         dynamoDBMapper.delete(employee);
     }
 
     @Override
+    @CacheEvict("employee")
     public Employee update(String employeeId, Employee employee) {
         var attributeValue = new AttributeValue().withS(employeeId);
         var expectedAttributeValue = new ExpectedAttributeValue(attributeValue);

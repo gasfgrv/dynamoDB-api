@@ -5,6 +5,10 @@ import br.com.gusta.dynamodb.api.model.EmployeeDto;
 import br.com.gusta.dynamodb.api.model.EmployeeInput;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import br.com.gusta.dynamodb.domain.service.EmployeeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @RestController
+@Api("Employee")
 @RequestMapping("/employee")
 @RequiredArgsConstructor
 public class EmployeeController {
@@ -29,7 +34,9 @@ public class EmployeeController {
     private final EmployeeMapper employeeMapper;
 
     @PostMapping
-    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody EmployeeInput employee) {
+    @ApiOperation(value = "Saves a new employee", notes = "Saves a new employee in dynamoDB")
+    @ApiResponse(code = 200, message = "Employee saved", response = Employee.class)
+    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody @ApiParam(value = "Form for creation of user", required = true) EmployeeInput employee) {
         log.info("Salving employee in dynamoDB");
 
         var employeeEntity = employeeMapper.toEntity(employee);
@@ -38,7 +45,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") String employeeId) {
+    @ApiOperation(value = "Get data of specific employee", notes = "Get data of specific employee in dynamoDB")
+    @ApiResponse(code = 200, message = "Data retrived", response = EmployeeDto.class)
+    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
         log.info("Getting info of employee {} in dynamoDB", employeeId);
 
         var dto = employeeMapper.toDto(employeeService.getEmployeeById(employeeId));
@@ -47,7 +56,9 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable("id") String employeeId) {
+    @ApiOperation(value = "Deletes specific employee", notes = "Deletes employee in dynamoDB")
+    @ApiResponse(code = 204, message = "Employee deleted")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
         log.info("Deleting info of employee {} in dynamoDB", employeeId);
 
         var employee = employeeService.getEmployeeById(employeeId);
@@ -59,8 +70,10 @@ public class EmployeeController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") String employeeId,
-                                                   @Valid @RequestBody EmployeeInput employee) {
+    @ApiOperation(value = "Update data of specific employee", notes = "Update data of specific employee in dynamoDB")
+    @ApiResponse(code = 200, message = "Employee updated", response = Employee.class)
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId,
+                                                   @Valid @RequestBody @ApiParam(value = "Form to update user", required = true) EmployeeInput employee) {
         log.info("Update info of employee {} in dynamoDB", employeeId);
 
         var employeeEntity = employeeMapper.toEntity(employee);

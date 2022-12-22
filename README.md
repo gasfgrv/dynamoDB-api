@@ -4,6 +4,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
 
 ## Tabela de Conteúdos <!-- omit from toc -->
 - [Features](#features)
+- [Contrato da API](#contrato-da-api)
 - [Endpoints da Aplicação](#endpoints-da-aplicação)
   - [/employee](#employee)
     - [POST](#post)
@@ -39,6 +40,165 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
 - [x] Atualização de dados de funcionários e seus respectivos departamentos
 
 - [x] Exclusão de dados de funcionários e seus respectivos departamentos
+
+## Contrato da API
+
+```yaml
+swagger: '2.0'
+info:
+  description: API using Spring Boot for dynamoDB testing
+  version: 1.0.0
+  title: DynamoDB API
+  license:
+    name: Apache License Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0"
+host: localhost:8080
+basePath: /
+tags:
+  - name: employee-controller
+    description: Employee Controller
+paths:
+  /employee:
+    post:
+      tags:
+        - employee-controller
+      summary: Saves a new employee
+      description: Saves a new employee in dynamoDB
+      operationId: saveEmployeeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: employee
+          description: Form for creation of user
+          required: true
+          schema:
+            $ref: '#/definitions/EmployeeInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Employee'
+      deprecated: false
+  /employee/{id}:
+    get:
+      tags:
+        - employee-controller
+      summary: Get data of specific employee
+      description: Get data of specific employee in dynamoDB
+      operationId: getEmployeeUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: Employee id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EmployeeDto'
+      deprecated: false
+    put:
+      tags:
+        - employee-controller
+      summary: Update data of specific employee
+      description: Update data of specific employee in dynamoDB
+      operationId: updateEmployeeUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: employee
+          description: Form to update user
+          required: true
+          schema:
+            $ref: '#/definitions/EmployeeInput'
+        - name: id
+          in: path
+          description: Employee id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Employee'
+      deprecated: false
+    delete:
+      tags:
+        - employee-controller
+      summary: Deletes specific employee
+      description: Deletes employee in dynamoDB
+      operationId: deleteEmployeeUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: Employee id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+      deprecated: false
+definitions:
+  Departament:
+    type: object
+    properties:
+      departamentCode:
+        type: string
+      departamentName:
+        type: string
+    title: Departament
+  Employee:
+    type: object
+    properties:
+      departament:
+        $ref: '#/definitions/Departament'
+      email:
+        type: string
+      employeeId:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+    title: Employee
+  EmployeeDto:
+    type: object
+    properties:
+      departamentCode:
+        type: string
+      departamentName:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+    title: EmployeeDto
+  EmployeeInput:
+    type: object
+    properties:
+      departament:
+        $ref: '#/definitions/Departament'
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+    title: EmployeeInput
+```
 
 ## Endpoints da Aplicação
 

@@ -7,7 +7,7 @@ import br.com.gusta.dynamodb.api.model.EmployeeUpdateInput;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import br.com.gusta.dynamodb.domain.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,37 +20,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/employee")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class EmployeeController {
 
     private final EmployeeService employeeService;
     private final EmployeeMapper employeeMapper;
 
-    @PostMapping("/employee")
+    @PostMapping
     public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody EmployeeInput employee) {
+        log.info("Salving employee in dynamoDB");
+
         var employeeEntity = employeeMapper.toEntity(employee);
+
         return ResponseEntity.ok(employeeService.save(employeeEntity));
     }
 
-    @GetMapping("/employee/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") String employeeId) {
+        log.info("Getting info of employee {} in dynamoDB", employeeId);
+
         var dto = employeeMapper.toDto(employeeService.getEmployeeById(employeeId));
+
         return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping("/employee/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable("id") String employeeId) {
+        log.info("Deleting info of employee {} in dynamoDB", employeeId);
+
         var employee = employeeService.getEmployeeById(employeeId);
+
         employeeService.delete(employee);
+
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/employee/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") String employeeId,
                                                    @Valid @RequestBody EmployeeUpdateInput employee) {
+        log.info("Update info of employee {} in dynamoDB", employeeId);
+
         var employeeEntity = employeeMapper.toEntity(employee);
+
         return ResponseEntity.ok(employeeService.update(employeeId, employeeEntity));
     }
 

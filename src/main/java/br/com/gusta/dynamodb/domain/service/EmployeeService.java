@@ -5,14 +5,13 @@ import br.com.gusta.dynamodb.domain.model.Employee;
 import br.com.gusta.dynamodb.domain.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
@@ -52,6 +51,10 @@ public class EmployeeService {
     }
 
     private Optional<Employee> employeeExists(Employee employee) {
+        if (employee.getEmployeeId() == null) {
+            return Optional.empty();
+        }
+
         Employee employeeById = employeeRepository.getEmployeeById(employee.getEmployeeId());
         return Optional.ofNullable(employeeById);
     }

@@ -6,11 +6,10 @@ import br.com.gusta.dynamodb.api.model.EmployeeUpdateInput;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class EmployeeMapper {
 
     private final ModelMapper mapper;

@@ -2,12 +2,14 @@ package br.com.gusta.dynamodb.common;
 
 import br.com.gusta.dynamodb.api.model.EmployeeDto;
 import br.com.gusta.dynamodb.domain.model.Employee;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.DestinationSetter;
 import org.modelmapper.spi.SourceGetter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 public class ModelMapperConfig {
 
@@ -20,6 +22,8 @@ public class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {
+        log.info("Creating bean ModelMapper");
+
         var mapper = new ModelMapper();
 
         mapper.createTypeMap(Employee.class, EmployeeDto.class)

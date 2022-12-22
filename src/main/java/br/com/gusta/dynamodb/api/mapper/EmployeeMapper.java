@@ -1,11 +1,12 @@
 package br.com.gusta.dynamodb.api.mapper;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
+
 import br.com.gusta.dynamodb.api.model.EmployeeDto;
 import br.com.gusta.dynamodb.api.model.EmployeeInput;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

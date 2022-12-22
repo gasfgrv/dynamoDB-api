@@ -1,5 +1,17 @@
 package br.com.gusta.dynamodb.api.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.gusta.dynamodb.api.mapper.EmployeeMapper;
 import br.com.gusta.dynamodb.api.model.EmployeeDto;
 import br.com.gusta.dynamodb.api.model.EmployeeInput;
@@ -11,17 +23,6 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -36,7 +37,8 @@ public class EmployeeController {
     @PostMapping
     @ApiOperation(value = "Saves a new employee", notes = "Saves a new employee in dynamoDB")
     @ApiResponse(code = 200, message = "Employee saved", response = Employee.class)
-    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody @ApiParam(value = "Form for creation of user", required = true) EmployeeInput employee) {
+    public ResponseEntity<Employee> saveEmployee(
+            @Valid @RequestBody @ApiParam(value = "Form for creation of user", required = true) EmployeeInput employee) {
         LOGGER.info("Salving employee in dynamoDB");
 
         var employeeEntity = employeeMapper.toEntity(employee);
@@ -47,7 +49,8 @@ public class EmployeeController {
     @GetMapping("/{id}")
     @ApiOperation(value = "Get data of specific employee", notes = "Get data of specific employee in dynamoDB")
     @ApiResponse(code = 200, message = "Data retrived", response = EmployeeDto.class)
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
+    public ResponseEntity<EmployeeDto> getEmployee(
+            @PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
         LOGGER.info("Getting info of employee {} in dynamoDB", employeeId);
 
         var dto = employeeMapper.toDto(employeeService.getEmployeeById(employeeId));
@@ -58,7 +61,8 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Deletes specific employee", notes = "Deletes employee in dynamoDB")
     @ApiResponse(code = 204, message = "Employee deleted")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
+    public ResponseEntity<Void> deleteEmployee(
+            @PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId) {
         LOGGER.info("Deleting info of employee {} in dynamoDB", employeeId);
 
         var employee = employeeService.getEmployeeById(employeeId);
@@ -68,12 +72,12 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-
     @PutMapping("/{id}")
     @ApiOperation(value = "Update data of specific employee", notes = "Update data of specific employee in dynamoDB")
     @ApiResponse(code = 200, message = "Employee updated", response = Employee.class)
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId,
-                                                   @Valid @RequestBody @ApiParam(value = "Form to update user", required = true) EmployeeInput employee) {
+    public ResponseEntity<Employee> updateEmployee(
+            @PathVariable("id") @ApiParam(value = "Employee id", required = true) String employeeId,
+            @Valid @RequestBody @ApiParam(value = "Form to update user", required = true) EmployeeInput employee) {
         LOGGER.info("Update info of employee {} in dynamoDB", employeeId);
 
         var employeeEntity = employeeMapper.toEntity(employee);

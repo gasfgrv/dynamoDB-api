@@ -18,7 +18,8 @@ public class EmployeeException extends RuntimeException {
         super(cause);
     }
 
-    protected EmployeeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    protected EmployeeException(String message, Throwable cause, boolean enableSuppression,
+            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

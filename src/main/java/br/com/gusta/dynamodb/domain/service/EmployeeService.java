@@ -1,13 +1,14 @@
 package br.com.gusta.dynamodb.domain.service;
 
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import br.com.gusta.dynamodb.domain.exception.EmployeeException;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import br.com.gusta.dynamodb.domain.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Slf4j
 @Service

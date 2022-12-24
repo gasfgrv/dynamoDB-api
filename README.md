@@ -312,19 +312,26 @@ Coleção para testar os endpoints da aplicação
 
 ## Pré-requisitos e como rodar a aplicação/testes
 
-Para rodar a aplicação basta ter o docker instalado e uma tabela no dynamoDB chamada _'employee'_, feito isso, rode os comandos abaixo:
+Pré-requisitos para rodar localmente:
+
+* JDK 11 ou superior
+* Maven 3
+* Uma conta na AWS com uma tabela chamada empoyee no dynamoDB
+  * Um usuário com as permissões (de preferencia a de full access ao bd)
+
+Para rodar via docker, rode os comandos abaixo:
 
 ```bash
 # Baixar a imagem
 docker pull gustosilva/dynamodb-api:latest
 
 # Gerar o containter
-docker run gustosilva/dynamodb-api:latest -d -p 8080:8080 \
-    --env SERVICE_ENDPOINT=[SERVICE_ENDPOINT] \
-    --env SIGNING_REGION=[SIGNING_REGION] \
-    --env ACCESS_KEY=[ACCESS_KEY] \
-    --env SECRET_KEY=[SECRET_KEY]
-
+docker run \
+  --env ACCESS_KEY=<ACCESS_KEY> \
+  --env SECRET_KEY=<SECRET_KEY> \
+  --env SERVICE_ENDPOINT=<SERVICE_ENDPOINT> \
+  --env SIGNING_REGION=<SIGNING_REGION> \
+  -p 8080:8080 gustosilva/dynamodb-api:latest
 ```
 
 ### Tecnologias utilizadas

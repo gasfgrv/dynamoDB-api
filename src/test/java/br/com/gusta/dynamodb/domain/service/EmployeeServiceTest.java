@@ -18,12 +18,11 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith({MockitoExtension.class, OutputCaptureExtension.class})
+@ExtendWith({SpringExtension.class, OutputCaptureExtension.class})
 class EmployeeServiceTest {
 
     private static String EMPLOYEE_ID;
@@ -31,7 +30,6 @@ class EmployeeServiceTest {
     @Mock
     private EmployeeRepository employeeRepository;
 
-    @Autowired
     @InjectMocks
     private EmployeeService employeeService;
 

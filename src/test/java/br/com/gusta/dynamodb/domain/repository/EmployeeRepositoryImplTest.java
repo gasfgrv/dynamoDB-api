@@ -1,97 +1,86 @@
 package br.com.gusta.dynamodb.domain.repository;
 
 import br.com.gusta.dynamodb.domain.model.Employee;
-import br.com.gusta.dynamodb.mocks.EmployeeMock;
+import br.com.gusta.dynamodb.mocks.MockUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.times;
+import static org.mockito.BDDMockito.verify;
+
+@Profile("test")
 @ExtendWith(SpringExtension.class)
 class EmployeeRepositoryImplTest {
-
-    public static Employee EMPLOYEE;
-
-    private static String EMPLOYEE_ID;
-
-    @Mock
-    private DynamoDBMapper dynamoDBMapper;
 
     @InjectMocks
     private EmployeeRepositoryImpl employeeRepository;
 
+    @Mock
+    private DynamoDBMapper dynamoDBMapper;
+
+    public Employee employee;
+
+    private String employeeId;
+
     @BeforeEach
     void initTest() {
-        EMPLOYEE_ID = EmployeeMock.get().getEmployeeId();
-        EMPLOYEE = EmployeeMock.get();
+        employeeId = MockUtils.getEmployeeEntity().getEmployeeId();
+        employee = MockUtils.getEmployeeEntity();
     }
 
     @Test
     void saveTest() {
-        assertThatCode(() -> employeeRepository.save(EMPLOYEE))
-                .doesNotThrowAnyException();
+        assertThatCode(() -> employeeRepository.save(employee)).doesNotThrowAnyException();
 
-        verify(dynamoDBMapper, times(1))
-                .save(any(Employee.class));
+        verify(dynamoDBMapper, times(1)).save(any(Employee.class));
     }
 
     @Test
     void getEmployeeByIdTest() {
-        doReturn(EMPLOYEE)
-                .when(dynamoDBMapper)
-                .load(Employee.class, EMPLOYEE_ID);
+        given(dynamoDBMapper.load(Employee.class, employeeId)).willReturn(employee);
 
-        assertThat(employeeRepository.getEmployeeById(EMPLOYEE_ID))
+        assertThat(employeeRepository.getEmployeeById(employeeId))
                 .usingRecursiveComparison()
-                .isEqualTo(EMPLOYEE);
+                .isEqualTo(employee);
 
-        verify(dynamoDBMapper, times(1))
-                .load(Employee.class, EMPLOYEE_ID);
+        verify(dynamoDBMapper, times(1)).load(Employee.class, employeeId);
     }
 
     @Test
     void getEmployeeByIdNotExistingTest() {
-        doReturn(null)
-                .when(dynamoDBMapper)
-                .load(Employee.class, EMPLOYEE_ID);
+        given(dynamoDBMapper.load(Employee.class, employeeId)).willReturn(null);
 
-        assertThat(employeeRepository.getEmployeeById(EMPLOYEE_ID)).isNull();
+        assertThat(employeeRepository.getEmployeeById(employeeId)).isNull();
 
-        verify(dynamoDBMapper, times(1))
-                .load(Employee.class, EMPLOYEE_ID);
+        verify(dynamoDBMapper, times(1)).load(Employee.class, employeeId);
     }
 
     @Test
     void deleteTest() {
-        assertThatCode(() -> employeeRepository.delete(EMPLOYEE))
-                .doesNotThrowAnyException();
+        assertThatCode(() -> employeeRepository.delete(employee)).doesNotThrowAnyException();
 
-        verify(dynamoDBMapper, times(1))
-                .delete(any(Employee.class));
+        verify(dynamoDBMapper, times(1)).delete(any(Employee.class));
     }
 
     @Test
     void updateTest() {
-        var newEmail = "novoemailgusta@email.com";
+        employee.setEmail("novoemailgusta@email.com");
 
-        var updatedEmployee = EMPLOYEE;
-        updatedEmployee.setEmail(newEmail);
-
-        assertThat(employeeRepository.update(EMPLOYEE_ID, updatedEmployee))
+        assertThat(employeeRepository.update(employeeId, employee))
                 .usingDefaultComparator()
-                .hasFieldOrPropertyWithValue("email", newEmail);
+                .hasFieldOrPropertyWithValue("email", "novoemailgusta@email.com");
 
-        verify(dynamoDBMapper, times(1))
-                .save(any(Employee.class), any(DynamoDBSaveExpression.class));
+        verify(dynamoDBMapper, times(1)).save(any(Employee.class), any(DynamoDBSaveExpression.class));
     }
 }

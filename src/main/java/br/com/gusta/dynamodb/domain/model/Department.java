@@ -2,7 +2,6 @@ package br.com.gusta.dynamodb.domain.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +12,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamoDBDocument
-public class Departament {
+public class Department {
 
     @DynamoDBAttribute
-    private String departamentName;
+    private String departmentName;
 
     @DynamoDBAttribute
-    private String departamentCode;
+    private String departmentCode;
 
 }

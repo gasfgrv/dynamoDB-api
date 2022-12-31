@@ -1,14 +1,12 @@
 package br.com.gusta.dynamodb.domain.service;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
 import br.com.gusta.dynamodb.domain.exception.EmployeeException;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import br.com.gusta.dynamodb.domain.repository.EmployeeRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -30,18 +28,20 @@ public class EmployeeService {
                 .orElseThrow(() -> new EmployeeException("This employee doesn't exists"));
     }
 
-    public void delete(Employee employee) {
-        if (employeeExists(employee).isEmpty()) {
-            throw new EmployeeException("This employee can't be delected");
+    public void delete(String employeeId) {
+        var employee = employeeExists(employeeId);
+
+        if (employee.isEmpty()) {
+            throw new EmployeeException("This employee can't be deleted");
         }
 
-        employeeRepository.delete(employee);
+        employeeRepository.delete(employee.get());
 
-        LOGGER.info("Employee {} was deleted data in DynamoDB", employee.getEmployeeId());
+        LOGGER.info("Employee {} was deleted data in DynamoDB", employee.get().getEmployeeId());
     }
 
     public Employee update(String employeeId, Employee employee) {
-        if (employeeExists(employee).isEmpty()) {
+        if (employeeExists(employeeId).isEmpty()) {
             throw new EmployeeException("This employee can't update his data");
         }
 
@@ -52,8 +52,8 @@ public class EmployeeService {
         return employee;
     }
 
-    private Optional<Employee> employeeExists(Employee employee) {
-        Employee employeeById = employeeRepository.getEmployeeById(employee.getEmployeeId());
+    private Optional<Employee> employeeExists(String employeeId) {
+        Employee employeeById = employeeRepository.getEmployeeById(employeeId);
 
         return Optional.ofNullable(employeeById);
     }

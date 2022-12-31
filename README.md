@@ -3,25 +3,34 @@
 API feita para testar a integração do Spring boot com o AWS DynamoDB.
 
 ## Tabela de Conteúdos <!-- omit from toc -->
+
 - [Features](#features)
 - [Contrato da API](#contrato-da-api)
 - [Endpoints da Aplicação](#endpoints-da-aplicação)
   - [/employee](#employee)
     - [POST](#post)
-      - [Parâmetros](#parâmetros)
-      - [Respostas](#respostas)
+      - [Summary:](#summary)
+      - [Description:](#description)
+      - [Parameters](#parameters)
+      - [Responses](#responses)
   - [/employee/{id}](#employeeid)
     - [GET](#get)
-      - [Parâmetros](#parâmetros-1)
-      - [Respostas](#respostas-1)
+      - [Summary:](#summary-1)
+      - [Description:](#description-1)
+      - [Parameters](#parameters-1)
+      - [Responses](#responses-1)
     - [PUT](#put)
-      - [Parâmetros](#parâmetros-2)
-      - [Respostas](#respostas-2)
+      - [Summary:](#summary-2)
+      - [Description:](#description-2)
+      - [Parameters](#parameters-2)
+      - [Responses](#responses-2)
     - [DELETE](#delete)
-      - [Parâmetros](#parâmetros-3)
-      - [Respostas](#respostas-3)
-  - [Modelos](#modelos)
-    - [Departament](#departament)
+      - [Summary:](#summary-3)
+      - [Description:](#description-3)
+      - [Parameters](#parameters-3)
+      - [Responses](#responses-3)
+  - [Models](#models)
+    - [Department](#department)
     - [Employee](#employee-1)
     - [EmployeeDto](#employeedto)
     - [EmployeeInput](#employeeinput)
@@ -30,6 +39,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
   - [Dependencias](#dependencias)
   - [Licença](#licença)
   - [Autor](#autor)
+
  
 ## Features
 
@@ -43,161 +53,282 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
 
 ## Contrato da API
 
-```yaml
-swagger: '2.0'
-info:
-  description: API using Spring Boot for dynamoDB testing
-  version: 1.0.0
-  title: DynamoDB API
-  license:
-    name: Apache License Version 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0"
-host: localhost:8080
-basePath: /
-tags:
-  - name: employee-controller
-    description: Employee Controller
-paths:
-  /employee:
-    post:
-      tags:
-        - employee-controller
-      summary: Saves a new employee
-      description: Saves a new employee in dynamoDB
-      operationId: saveEmployeeUsingPOST
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - in: body
-          name: employee
-          description: Form for creation of user
-          required: true
-          schema:
-            $ref: '#/definitions/EmployeeInput'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Employee'
-      deprecated: false
-  /employee/{id}:
-    get:
-      tags:
-        - employee-controller
-      summary: Get data of specific employee
-      description: Get data of specific employee in dynamoDB
-      operationId: getEmployeeUsingGET
-      produces:
-        - '*/*'
-      parameters:
-        - name: id
-          in: path
-          description: Employee id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/EmployeeDto'
-      deprecated: false
-    put:
-      tags:
-        - employee-controller
-      summary: Update data of specific employee
-      description: Update data of specific employee in dynamoDB
-      operationId: updateEmployeeUsingPUT
-      consumes:
-        - application/json
-      produces:
-        - '*/*'
-      parameters:
-        - in: body
-          name: employee
-          description: Form to update user
-          required: true
-          schema:
-            $ref: '#/definitions/EmployeeInput'
-        - name: id
-          in: path
-          description: Employee id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Employee'
-      deprecated: false
-    delete:
-      tags:
-        - employee-controller
-      summary: Deletes specific employee
-      description: Deletes employee in dynamoDB
-      operationId: deleteEmployeeUsingDELETE
-      produces:
-        - '*/*'
-      parameters:
-        - name: id
-          in: path
-          description: Employee id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-      deprecated: false
-definitions:
-  Departament:
-    type: object
-    properties:
-      departamentCode:
-        type: string
-      departamentName:
-        type: string
-    title: Departament
-  Employee:
-    type: object
-    properties:
-      departament:
-        $ref: '#/definitions/Departament'
-      email:
-        type: string
-      employeeId:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-    title: Employee
-  EmployeeDto:
-    type: object
-    properties:
-      departamentCode:
-        type: string
-      departamentName:
-        type: string
-      email:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-    title: EmployeeDto
-  EmployeeInput:
-    type: object
-    properties:
-      departament:
-        $ref: '#/definitions/Departament'
-      email:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-    title: EmployeeInput
+```json
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API using Spring Boot for dynamoDB testing",
+    "version": "1.0.0",
+    "title": "DynamoDB API",
+    "license": {
+      "name": "Apache License Version 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "employee-controller",
+      "description": "Employee Controller"
+    }
+  ],
+  "paths": {
+    "/employee": {
+      "post": {
+        "tags": [
+          "employee-controller"
+        ],
+        "summary": "Saves a new employee",
+        "description": "Saves a new employee in dynamoDB",
+        "operationId": "saveEmployeeUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "employee",
+            "description": "Form for creation of user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmployeeInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/employee/{id}": {
+      "get": {
+        "tags": [
+          "employee-controller"
+        ],
+        "summary": "Get data of specific employee",
+        "description": "Get data of specific employee in dynamoDB",
+        "operationId": "getEmployeeUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Employee id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EmployeeDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "employee-controller"
+        ],
+        "summary": "Update data of specific employee",
+        "description": "Update data of specific employee in dynamoDB",
+        "operationId": "updateEmployeeUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "employee",
+            "description": "Form to update user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmployeeInput"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Employee id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EmployeeDto"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "employee-controller"
+        ],
+        "summary": "Deletes specific employee",
+        "description": "Deletes employee in dynamoDB",
+        "operationId": "deleteEmployeeUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Employee id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Department": {
+      "type": "object",
+      "properties": {
+        "departmentCode": {
+          "type": "string"
+        },
+        "departmentName": {
+          "type": "string"
+        }
+      },
+      "title": "Department"
+    },
+    "Employee": {
+      "type": "object",
+      "properties": {
+        "department": {
+          "$ref": "#/definitions/Department"
+        },
+        "email": {
+          "type": "string"
+        },
+        "employeeId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "title": "Employee"
+    },
+    "EmployeeDto": {
+      "type": "object",
+      "properties": {
+        "departamentCode": {
+          "type": "string"
+        },
+        "departamentName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "title": "EmployeeDto"
+    },
+    "EmployeeInput": {
+      "type": "object",
+      "properties": {
+        "department": {
+          "$ref": "#/definitions/Department"
+        },
+        "email": {
+          "type": "string"
+        },
+        "employeeId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      },
+      "title": "EmployeeInput"
+    }
+  }
+}
 ```
 
 ## Endpoints da Aplicação
@@ -206,105 +337,147 @@ definitions:
 
 #### POST
 
-##### Parâmetros
+##### Summary:
 
-| Nome     | Localizado em | Descrição                            | Obrigatório | Schema                          |
-| -------- | ------------- | ------------------------------------ | ----------- | ------------------------------- |
-| employee | body          | Formulário para criação do empregado | Sim         | [EmployeeInput](#employeeinput) |
+Saves a new employee
 
-##### Respostas
+##### Description:
 
-| Code | Descrição | Schema                |
-| ---- | --------- | --------------------- |
-| 200  | OK        | [Employee](#employee) |
+Saves a new employee in dynamoDB
 
+##### Parameters
+
+| Name     | Located in | Description               | Required | Schema                          |
+|----------|------------|---------------------------|----------|---------------------------------|
+| employee | body       | Form for creation of user | Yes      | [EmployeeInput](#EmployeeInput) |
+
+##### Responses
+
+| Code | Description  | Schema                |
+|------|--------------|-----------------------|
+| 200  | OK           | [Employee](#Employee) |
+| 201  | Created      |                       |
+| 401  | Unauthorized |                       |
+| 403  | Forbidden    |                       |
+| 404  | Not Found    |                       |
 
 ### /employee/{id}
 
 #### GET
 
-##### Parâmetros
+##### Summary:
 
-| Nome | Localizado em | Descrição       | Obrigatório | Schema |
-| ---- | ------------- | --------------- | ----------- | ------ |
-| id   | path          | Id do empregado | Sim         | string |
+Get data of specific employee
 
-##### Respostas
+##### Description:
 
-| Code | Descrição | Schema                      |
-| ---- | --------- | --------------------------- |
-| 200  | OK        | [EmployeeDto](#employeedto) |
+Get data of specific employee in dynamoDB
 
+##### Parameters
+
+| Name | Located in | Description | Required | Schema |
+|------|------------|-------------|----------|--------|
+| id   | path       | Employee id | Yes      | string |
+
+##### Responses
+
+| Code | Description  | Schema                      |
+|------|--------------|-----------------------------|
+| 200  | OK           | [EmployeeDto](#EmployeeDto) |
+| 401  | Unauthorized |                             |
+| 403  | Forbidden    |                             |
+| 404  | Not Found    |                             |
 
 #### PUT
 
-##### Parâmetros
+##### Summary:
 
-| Nome     | Localizado em | Descrição                               | Obrigatório | Schema                          |
-| -------- | ------------- | --------------------------------------- | ----------- | ------------------------------- |
-| employee | body          | Formulário para aualização do empregado | Sim         | [EmployeeInput](#employeeinput) |
-| id       | path          | Id do empregado                         | Sim         | string                          |
+Update data of specific employee
 
-##### Respostas
+##### Description:
 
-| Code | Descrição | Schema                |
-| ---- | --------- | --------------------- |
-| 200  | OK        | [Employee](#employee) |
+Update data of specific employee in dynamoDB
 
+##### Parameters
+
+| Name     | Located in | Description         | Required | Schema                          |
+|----------|------------|---------------------|----------|---------------------------------|
+| employee | body       | Form to update user | Yes      | [EmployeeInput](#EmployeeInput) |
+| id       | path       | Employee id         | Yes      | string                          |
+
+##### Responses
+
+| Code | Description  | Schema                      |
+|------|--------------|-----------------------------|
+| 200  | OK           | [EmployeeDto](#EmployeeDto) |
+| 201  | Created      |                             |
+| 401  | Unauthorized |                             |
+| 403  | Forbidden    |                             |
+| 404  | Not Found    |                             |
 
 #### DELETE
 
-##### Parâmetros
+##### Summary:
 
-| Nome | Localizado em | Descrição       | Obrigatório | Schema |
-| ---- | ------------- | --------------- | ----------- | ------ |
-| id   | path          | Id do empregado | Sim         | string |
+Deletes specific employee
 
-##### Respostas
+##### Description:
 
-| Code | Descrição  |
-| ---- | ---------- |
-| 204  | No Content |
+Deletes employee in dynamoDB
 
-### Modelos
+##### Parameters
 
+| Name | Located in | Description | Required | Schema |
+|------|------------|-------------|----------|--------|
+| id   | path       | Employee id | Yes      | string |
 
-#### Departament
+##### Responses
 
-| Nome            | Type   | Descrição | Obrigatório |
-| --------------- | ------ | --------- | ----------- |
-| departamentCode | string |           | No          |
-| departamentNome | string |           | No          |
+| Code | Description  |
+|------|--------------|
+| 200  | OK           |
+| 204  | No Content   |
+| 401  | Unauthorized |
+| 403  | Forbidden    |
+
+### Models
+
+#### Department
+
+| Name           | Type   | Description | Required |
+|----------------|--------|-------------|----------|
+| departmentCode | string |             | No       |
+| departmentName | string |             | No       |
 
 #### Employee
 
-| Nome        | Type                        | Descrição | Obrigatório |
-| ----------- | --------------------------- | --------- | ----------- |
-| departament | [Departament](#departament) |           | No          |
-| email       | string                      |           | No          |
-| employeeId  | string                      |           | No          |
-| firstNome   | string                      |           | No          |
-| lastNome    | string                      |           | No          |
+| Name       | Type                      | Description | Required |
+|------------|---------------------------|-------------|----------|
+| department | [Department](#Department) |             | No       |
+| email      | string                    |             | No       |
+| employeeId | string                    |             | No       |
+| firstName  | string                    |             | No       |
+| lastName   | string                    |             | No       |
 
 #### EmployeeDto
 
-| Nome            | Type   | Descrição | Obrigatório |
-| --------------- | ------ | --------- | ----------- |
-| departamentCode | string |           | No          |
-| departamentNome | string |           | No          |
-| email           | string |           | No          |
-| firstNome       | string |           | No          |
-| lastNome        | string |           | No          |
+| Name            | Type   | Description | Required |
+|-----------------|--------|-------------|----------|
+| departamentCode | string |             | No       |
+| departamentName | string |             | No       |
+| email           | string |             | No       |
+| firstName       | string |             | No       |
+| lastName        | string |             | No       |
 
 #### EmployeeInput
 
-| Nome        | Type                        | Descrição | Obrigatório |
-| ----------- | --------------------------- | --------- | ----------- |
-| departament | [Departament](#departament) |           | No          |
-| email       | string                      |           | No          |
-| firstNome   | string                      |           | No          |
-| lastNome    | string                      |           | No          |
-
+| Name       | Type                      | Description | Required |
+|------------|---------------------------|-------------|----------|
+| department | [Department](#Department) |             | No       |
+| email      | string                    |             | No       |
+| employeeId | string                    |             | No       |
+| firstName  | string                    |             | No       |
+| lastName   | string                    |             | No       |
 
 Coleção para testar os endpoints da aplicação
 

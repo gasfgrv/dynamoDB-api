@@ -1,65 +1,33 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-12-22T18:43:31.969Z",
+  "__export_date": "2022-12-31T04:08:56.003Z",
   "__export_source": "insomnia.desktop.app:v2022.4.0",
   "resources": [
     {
-      "_id": "req_069c5ab26283493ab4da97e3b442636b",
-      "parentId": "wrk_a5d2346282ff4bb7b72ad090e1854ef8",
-      "modified": 1671729847983,
-      "created": 1671729784505,
-      "url": "http://localhost:8080/v2/api-docs",
-      "name": "Get Documentation",
-      "description": "",
-      "method": "GET",
-      "body": {},
-      "parameters": [],
-      "headers": [],
-      "authentication": {},
-      "metaSortKey": -1671729784505,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    },
-    {
-      "_id": "wrk_a5d2346282ff4bb7b72ad090e1854ef8",
-      "parentId": null,
-      "modified": 1671729514542,
-      "created": 1671729281154,
-      "name": "dynamoDB-API.json",
-      "description": "API using Spring Boot for dynamoDB testing",
-      "scope": "design",
-      "_type": "workspace"
-    },
-    {
       "_id": "saveEmployeeUsingPOST",
-      "parentId": "fld_wrk_a5d2346282ff4bb7b72ad090e1854ef8159e3f15",
-      "modified": 1671729338443,
-      "created": 1671729338443,
+      "parentId": "fld_wrk_c931602761904a8ea01f8b898171cdb1159e3f15",
+      "modified": 1672459560798,
+      "created": 1672459500288,
       "url": "{{ base_url }}/employee",
       "name": "Saves a new employee",
       "description": "Saves a new employee in dynamoDB",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"departament\": {\n    \"departamentCode\": \"string\",\n    \"departamentName\": \"string\"\n  },\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\"\n}"
+        "text": "{\n  \"department\": {\n    \"departmentCode\": \"string\",\n    \"departmentName\": \"string\"\n  },\n  \"email\": \"string\",\n  \"employeeId\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\"\n}"
       },
       "parameters": [],
       "headers": [
         {
           "name": "Content-Type",
           "disabled": false,
-          "value": "application/json"
+          "value": "application/json",
+          "id": "pair_cf06746419604309931959a9713f813a"
         }
       ],
       "authentication": {},
-      "metaSortKey": -1671729338443,
+      "metaSortKey": -1672459500288,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -70,22 +38,32 @@
       "_type": "request"
     },
     {
-      "_id": "fld_wrk_a5d2346282ff4bb7b72ad090e1854ef8159e3f15",
-      "parentId": "wrk_a5d2346282ff4bb7b72ad090e1854ef8",
-      "modified": 1671729338445,
-      "created": 1671729338445,
+      "_id": "fld_wrk_c931602761904a8ea01f8b898171cdb1159e3f15",
+      "parentId": "wrk_c931602761904a8ea01f8b898171cdb1",
+      "modified": 1672459500290,
+      "created": 1672459500290,
       "name": "employee-controller",
       "description": "Employee Controller",
       "environment": {},
       "environmentPropertyOrder": null,
-      "metaSortKey": -1671729338445,
+      "metaSortKey": -1672459500290,
       "_type": "request_group"
     },
     {
+      "_id": "wrk_c931602761904a8ea01f8b898171cdb1",
+      "parentId": null,
+      "modified": 1671994689595,
+      "created": 1671994689595,
+      "name": "DynamoDB API",
+      "description": "",
+      "scope": "design",
+      "_type": "workspace"
+    },
+    {
       "_id": "getEmployeeUsingGET",
-      "parentId": "fld_wrk_a5d2346282ff4bb7b72ad090e1854ef8159e3f15",
-      "modified": 1671729338442,
-      "created": 1671729338442,
+      "parentId": "fld_wrk_c931602761904a8ea01f8b898171cdb1159e3f15",
+      "modified": 1672459500286,
+      "created": 1672459500286,
       "url": "{{ base_url }}/employee/{{ id }}",
       "name": "Get data of specific employee",
       "description": "Get data of specific employee in dynamoDB",
@@ -94,7 +72,7 @@
       "parameters": [],
       "headers": [],
       "authentication": {},
-      "metaSortKey": -1671729338442,
+      "metaSortKey": -1672459500286,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -106,27 +84,28 @@
     },
     {
       "_id": "updateEmployeeUsingPUT",
-      "parentId": "fld_wrk_a5d2346282ff4bb7b72ad090e1854ef8159e3f15",
-      "modified": 1671729338440,
-      "created": 1671729338440,
+      "parentId": "fld_wrk_c931602761904a8ea01f8b898171cdb1159e3f15",
+      "modified": 1672459552949,
+      "created": 1672459500285,
       "url": "{{ base_url }}/employee/{{ id }}",
       "name": "Update data of specific employee",
       "description": "Update data of specific employee in dynamoDB",
       "method": "PUT",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"departament\": {\n    \"departamentCode\": \"string\",\n    \"departamentName\": \"string\"\n  },\n  \"email\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\"\n}"
+        "text": "{\n  \"department\": {\n    \"departmentCode\": \"string\",\n    \"departmentName\": \"string\"\n  },\n  \"email\": \"string\",\n  \"employeeId\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\"\n}"
       },
       "parameters": [],
       "headers": [
         {
           "name": "Content-Type",
           "disabled": false,
-          "value": "application/json"
+          "value": "application/json",
+          "id": "pair_bde9a456187349bfa8e1078c90d8b58c"
         }
       ],
       "authentication": {},
-      "metaSortKey": -1671729338440,
+      "metaSortKey": -1672459500285,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -138,9 +117,9 @@
     },
     {
       "_id": "deleteEmployeeUsingDELETE",
-      "parentId": "fld_wrk_a5d2346282ff4bb7b72ad090e1854ef8159e3f15",
-      "modified": 1671729338439,
-      "created": 1671729338439,
+      "parentId": "fld_wrk_c931602761904a8ea01f8b898171cdb1159e3f15",
+      "modified": 1672459500282,
+      "created": 1672459500282,
       "url": "{{ base_url }}/employee/{{ id }}",
       "name": "Deletes specific employee",
       "description": "Deletes employee in dynamoDB",
@@ -149,7 +128,7 @@
       "parameters": [],
       "headers": [],
       "authentication": {},
-      "metaSortKey": -1671729338439,
+      "metaSortKey": -1672459500282,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -160,54 +139,66 @@
       "_type": "request"
     },
     {
-      "_id": "env_58653a7b66336dadc9f3a1123945a4473b9e54e3",
-      "parentId": "wrk_a5d2346282ff4bb7b72ad090e1854ef8",
-      "modified": 1671729281209,
-      "created": 1671729281209,
+      "_id": "env_e0f5e8bf471d3d3353b17beafb60e561e53ce8ad",
+      "parentId": "wrk_c931602761904a8ea01f8b898171cdb1",
+      "modified": 1672334300578,
+      "created": 1671994689609,
       "name": "Base Environment",
       "data": {
-        "base_url": "{{ scheme }}://{{ host }}{{ base_path }}"
+        "base_url": "{{ scheme }}://{{ host }}"
       },
-      "dataPropertyOrder": null,
+      "dataPropertyOrder": {
+        "&": [
+          "base_url"
+        ]
+      },
       "color": null,
       "isPrivate": false,
-      "metaSortKey": 1671729281210,
+      "metaSortKey": 1671994689609,
       "_type": "environment"
     },
     {
-      "_id": "jar_58653a7b66336dadc9f3a1123945a4473b9e54e3",
-      "parentId": "wrk_a5d2346282ff4bb7b72ad090e1854ef8",
-      "modified": 1671729281250,
-      "created": 1671729281250,
+      "_id": "jar_e0f5e8bf471d3d3353b17beafb60e561e53ce8ad",
+      "parentId": "wrk_c931602761904a8ea01f8b898171cdb1",
+      "modified": 1671994689611,
+      "created": 1671994689611,
       "name": "Default Jar",
       "cookies": [],
       "_type": "cookie_jar"
     },
     {
-      "_id": "spc_5eab27cf91fc4072882837952422dbb1",
-      "parentId": "wrk_a5d2346282ff4bb7b72ad090e1854ef8",
-      "modified": 1671734590113,
-      "created": 1671729281155,
-      "fileName": "dynamoDB-API",
-      "contents": "{\n\t\"swagger\": \"2.0\",\n\t\"info\": {\n\t\t\"description\": \"API using Spring Boot for dynamoDB testing\",\n\t\t\"version\": \"1.0.0\",\n\t\t\"title\": \"DynamoDB API\",\n\t\t\"license\": {\n\t\t\t\"name\": \"Apache License Version 2.0\",\n\t\t\t\"url\": \"https://www.apache.org/licenses/LICENSE-2.0\"\n\t\t}\n\t},\n\t\"host\": \"localhost:8080\",\n\t\"basePath\": \"/\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"name\": \"employee-controller\",\n\t\t\t\"description\": \"Employee Controller\"\n\t\t}\n\t],\n\t\"paths\": {\n\t\t\"/employee\": {\n\t\t\t\"post\": {\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"employee-controller\"\n\t\t\t\t],\n\t\t\t\t\"summary\": \"Saves a new employee\",\n\t\t\t\t\"description\": \"Saves a new employee in dynamoDB\",\n\t\t\t\t\"operationId\": \"saveEmployeeUsingPOST\",\n\t\t\t\t\"consumes\": [\n\t\t\t\t\t\"application/json\"\n\t\t\t\t],\n\t\t\t\t\"produces\": [\n\t\t\t\t\t\"*/*\"\n\t\t\t\t],\n\t\t\t\t\"parameters\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"in\": \"body\",\n\t\t\t\t\t\t\"name\": \"employee\",\n\t\t\t\t\t\t\"description\": \"Form for creation of user\",\n\t\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\t\"schema\": {\n\t\t\t\t\t\t\t\"$ref\": \"#/definitions/EmployeeInput\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"responses\": {\n\t\t\t\t\t\"200\": {\n\t\t\t\t\t\t\"description\": \"OK\",\n\t\t\t\t\t\t\"schema\": {\n\t\t\t\t\t\t\t\"$ref\": \"#/definitions/Employee\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"201\": {\n\t\t\t\t\t\t\"description\": \"Created\"\n\t\t\t\t\t},\n\t\t\t\t\t\"401\": {\n\t\t\t\t\t\t\"description\": \"Unauthorized\"\n\t\t\t\t\t},\n\t\t\t\t\t\"403\": {\n\t\t\t\t\t\t\"description\": \"Forbidden\"\n\t\t\t\t\t},\n\t\t\t\t\t\"404\": {\n\t\t\t\t\t\t\"description\": \"Not Found\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"deprecated\": false\n\t\t\t}\n\t\t},\n\t\t\"/employee/{id}\": {\n\t\t\t\"get\": {\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"employee-controller\"\n\t\t\t\t],\n\t\t\t\t\"summary\": \"Get data of specific employee\",\n\t\t\t\t\"description\": \"Get data of specific employee in dynamoDB\",\n\t\t\t\t\"operationId\": \"getEmployeeUsingGET\",\n\t\t\t\t\"produces\": [\n\t\t\t\t\t\"*/*\"\n\t\t\t\t],\n\t\t\t\t\"parameters\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"name\": \"id\",\n\t\t\t\t\t\t\"in\": \"path\",\n\t\t\t\t\t\t\"description\": \"Employee id\",\n\t\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"responses\": {\n\t\t\t\t\t\"200\": {\n\t\t\t\t\t\t\"description\": \"OK\",\n\t\t\t\t\t\t\"schema\": {\n\t\t\t\t\t\t\t\"$ref\": \"#/definitions/EmployeeDto\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"401\": {\n\t\t\t\t\t\t\"description\": \"Unauthorized\"\n\t\t\t\t\t},\n\t\t\t\t\t\"403\": {\n\t\t\t\t\t\t\"description\": \"Forbidden\"\n\t\t\t\t\t},\n\t\t\t\t\t\"404\": {\n\t\t\t\t\t\t\"description\": \"Not Found\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"deprecated\": false\n\t\t\t},\n\t\t\t\"put\": {\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"employee-controller\"\n\t\t\t\t],\n\t\t\t\t\"summary\": \"Update data of specific employee\",\n\t\t\t\t\"description\": \"Update data of specific employee in dynamoDB\",\n\t\t\t\t\"operationId\": \"updateEmployeeUsingPUT\",\n\t\t\t\t\"consumes\": [\n\t\t\t\t\t\"application/json\"\n\t\t\t\t],\n\t\t\t\t\"produces\": [\n\t\t\t\t\t\"*/*\"\n\t\t\t\t],\n\t\t\t\t\"parameters\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"in\": \"body\",\n\t\t\t\t\t\t\"name\": \"employee\",\n\t\t\t\t\t\t\"description\": \"Form to update user\",\n\t\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\t\"schema\": {\n\t\t\t\t\t\t\t\"$ref\": \"#/definitions/EmployeeInput\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"name\": \"id\",\n\t\t\t\t\t\t\"in\": \"path\",\n\t\t\t\t\t\t\"description\": \"Employee id\",\n\t\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"responses\": {\n\t\t\t\t\t\"200\": {\n\t\t\t\t\t\t\"description\": \"OK\",\n\t\t\t\t\t\t\"schema\": {\n\t\t\t\t\t\t\t\"$ref\": \"#/definitions/Employee\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"201\": {\n\t\t\t\t\t\t\"description\": \"Created\"\n\t\t\t\t\t},\n\t\t\t\t\t\"401\": {\n\t\t\t\t\t\t\"description\": \"Unauthorized\"\n\t\t\t\t\t},\n\t\t\t\t\t\"403\": {\n\t\t\t\t\t\t\"description\": \"Forbidden\"\n\t\t\t\t\t},\n\t\t\t\t\t\"404\": {\n\t\t\t\t\t\t\"description\": \"Not Found\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"deprecated\": false\n\t\t\t},\n\t\t\t\"delete\": {\n\t\t\t\t\"tags\": [\n\t\t\t\t\t\"employee-controller\"\n\t\t\t\t],\n\t\t\t\t\"summary\": \"Deletes specific employee\",\n\t\t\t\t\"description\": \"Deletes employee in dynamoDB\",\n\t\t\t\t\"operationId\": \"deleteEmployeeUsingDELETE\",\n\t\t\t\t\"produces\": [\n\t\t\t\t\t\"*/*\"\n\t\t\t\t],\n\t\t\t\t\"parameters\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"name\": \"id\",\n\t\t\t\t\t\t\"in\": \"path\",\n\t\t\t\t\t\t\"description\": \"Employee id\",\n\t\t\t\t\t\t\"required\": true,\n\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"responses\": {\n\t\t\t\t\t\"200\": {\n\t\t\t\t\t\t\"description\": \"OK\"\n\t\t\t\t\t},\n\t\t\t\t\t\"204\": {\n\t\t\t\t\t\t\"description\": \"No Content\"\n\t\t\t\t\t},\n\t\t\t\t\t\"401\": {\n\t\t\t\t\t\t\"description\": \"Unauthorized\"\n\t\t\t\t\t},\n\t\t\t\t\t\"403\": {\n\t\t\t\t\t\t\"description\": \"Forbidden\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t\"deprecated\": false\n\t\t\t}\n\t\t}\n\t},\n\t\"definitions\": {\n\t\t\"Departament\": {\n\t\t\t\"type\": \"object\",\n\t\t\t\"properties\": {\n\t\t\t\t\"departamentCode\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"departamentName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"title\": \"Departament\"\n\t\t},\n\t\t\"Employee\": {\n\t\t\t\"type\": \"object\",\n\t\t\t\"properties\": {\n\t\t\t\t\"departament\": {\n\t\t\t\t\t\"$ref\": \"#/definitions/Departament\"\n\t\t\t\t},\n\t\t\t\t\"email\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"employeeId\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"firstName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"lastName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"title\": \"Employee\"\n\t\t},\n\t\t\"EmployeeDto\": {\n\t\t\t\"type\": \"object\",\n\t\t\t\"properties\": {\n\t\t\t\t\"departamentCode\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"departamentName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"email\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"firstName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"lastName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"title\": \"EmployeeDto\"\n\t\t},\n\t\t\"EmployeeInput\": {\n\t\t\t\"type\": \"object\",\n\t\t\t\"properties\": {\n\t\t\t\t\"departament\": {\n\t\t\t\t\t\"$ref\": \"#/definitions/Departament\"\n\t\t\t\t},\n\t\t\t\t\"email\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"firstName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t},\n\t\t\t\t\"lastName\": {\n\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"title\": \"EmployeeInput\"\n\t\t}\n\t}\n}",
+      "_id": "spc_7eb549f6830849f780bf9a11bd3d9d0c",
+      "parentId": "wrk_c931602761904a8ea01f8b898171cdb1",
+      "modified": 1672459503391,
+      "created": 1671994689602,
+      "fileName": "DynamoDB API",
+      "contents": "{\n  \"swagger\": \"2.0\",\n  \"info\": {\n    \"description\": \"API using Spring Boot for dynamoDB testing\",\n    \"version\": \"1.0.0\",\n    \"title\": \"DynamoDB API\",\n    \"license\": {\n      \"name\": \"Apache License Version 2.0\",\n      \"url\": \"https://www.apache.org/licenses/LICENSE-2.0\"\n    }\n  },\n  \"host\": \"localhost:8080\",\n  \"basePath\": \"/\",\n  \"tags\": [\n    {\n      \"name\": \"employee-controller\",\n      \"description\": \"Employee Controller\"\n    }\n  ],\n  \"paths\": {\n    \"/employee\": {\n      \"post\": {\n        \"tags\": [\n          \"employee-controller\"\n        ],\n        \"summary\": \"Saves a new employee\",\n        \"description\": \"Saves a new employee in dynamoDB\",\n        \"operationId\": \"saveEmployeeUsingPOST\",\n        \"consumes\": [\n          \"application/json\"\n        ],\n        \"produces\": [\n          \"*/*\"\n        ],\n        \"parameters\": [\n          {\n            \"in\": \"body\",\n            \"name\": \"employee\",\n            \"description\": \"Form for creation of user\",\n            \"required\": true,\n            \"schema\": {\n              \"$ref\": \"#/definitions/EmployeeInput\"\n            }\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"OK\",\n            \"schema\": {\n              \"$ref\": \"#/definitions/Employee\"\n            }\n          },\n          \"201\": {\n            \"description\": \"Created\"\n          },\n          \"401\": {\n            \"description\": \"Unauthorized\"\n          },\n          \"403\": {\n            \"description\": \"Forbidden\"\n          },\n          \"404\": {\n            \"description\": \"Not Found\"\n          }\n        },\n        \"deprecated\": false\n      }\n    },\n    \"/employee/{id}\": {\n      \"get\": {\n        \"tags\": [\n          \"employee-controller\"\n        ],\n        \"summary\": \"Get data of specific employee\",\n        \"description\": \"Get data of specific employee in dynamoDB\",\n        \"operationId\": \"getEmployeeUsingGET\",\n        \"produces\": [\n          \"*/*\"\n        ],\n        \"parameters\": [\n          {\n            \"name\": \"id\",\n            \"in\": \"path\",\n            \"description\": \"Employee id\",\n            \"required\": true,\n            \"type\": \"string\"\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"OK\",\n            \"schema\": {\n              \"$ref\": \"#/definitions/EmployeeDto\"\n            }\n          },\n          \"401\": {\n            \"description\": \"Unauthorized\"\n          },\n          \"403\": {\n            \"description\": \"Forbidden\"\n          },\n          \"404\": {\n            \"description\": \"Not Found\"\n          }\n        },\n        \"deprecated\": false\n      },\n      \"put\": {\n        \"tags\": [\n          \"employee-controller\"\n        ],\n        \"summary\": \"Update data of specific employee\",\n        \"description\": \"Update data of specific employee in dynamoDB\",\n        \"operationId\": \"updateEmployeeUsingPUT\",\n        \"consumes\": [\n          \"application/json\"\n        ],\n        \"produces\": [\n          \"*/*\"\n        ],\n        \"parameters\": [\n          {\n            \"in\": \"body\",\n            \"name\": \"employee\",\n            \"description\": \"Form to update user\",\n            \"required\": true,\n            \"schema\": {\n              \"$ref\": \"#/definitions/EmployeeInput\"\n            }\n          },\n          {\n            \"name\": \"id\",\n            \"in\": \"path\",\n            \"description\": \"Employee id\",\n            \"required\": true,\n            \"type\": \"string\"\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"OK\",\n            \"schema\": {\n              \"$ref\": \"#/definitions/EmployeeDto\"\n            }\n          },\n          \"201\": {\n            \"description\": \"Created\"\n          },\n          \"401\": {\n            \"description\": \"Unauthorized\"\n          },\n          \"403\": {\n            \"description\": \"Forbidden\"\n          },\n          \"404\": {\n            \"description\": \"Not Found\"\n          }\n        },\n        \"deprecated\": false\n      },\n      \"delete\": {\n        \"tags\": [\n          \"employee-controller\"\n        ],\n        \"summary\": \"Deletes specific employee\",\n        \"description\": \"Deletes employee in dynamoDB\",\n        \"operationId\": \"deleteEmployeeUsingDELETE\",\n        \"produces\": [\n          \"*/*\"\n        ],\n        \"parameters\": [\n          {\n            \"name\": \"id\",\n            \"in\": \"path\",\n            \"description\": \"Employee id\",\n            \"required\": true,\n            \"type\": \"string\"\n          }\n        ],\n        \"responses\": {\n          \"200\": {\n            \"description\": \"OK\"\n          },\n          \"204\": {\n            \"description\": \"No Content\"\n          },\n          \"401\": {\n            \"description\": \"Unauthorized\"\n          },\n          \"403\": {\n            \"description\": \"Forbidden\"\n          }\n        },\n        \"deprecated\": false\n      }\n    }\n  },\n  \"definitions\": {\n    \"Department\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"departmentCode\": {\n          \"type\": \"string\"\n        },\n        \"departmentName\": {\n          \"type\": \"string\"\n        }\n      },\n      \"title\": \"Department\"\n    },\n    \"Employee\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"department\": {\n          \"$ref\": \"#/definitions/Department\"\n        },\n        \"email\": {\n          \"type\": \"string\"\n        },\n        \"employeeId\": {\n          \"type\": \"string\"\n        },\n        \"firstName\": {\n          \"type\": \"string\"\n        },\n        \"lastName\": {\n          \"type\": \"string\"\n        }\n      },\n      \"title\": \"Employee\"\n    },\n    \"EmployeeDto\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"departamentCode\": {\n          \"type\": \"string\"\n        },\n        \"departamentName\": {\n          \"type\": \"string\"\n        },\n        \"email\": {\n          \"type\": \"string\"\n        },\n        \"firstName\": {\n          \"type\": \"string\"\n        },\n        \"lastName\": {\n          \"type\": \"string\"\n        }\n      },\n      \"title\": \"EmployeeDto\"\n    },\n    \"EmployeeInput\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"department\": {\n          \"$ref\": \"#/definitions/Department\"\n        },\n        \"email\": {\n          \"type\": \"string\"\n        },\n        \"employeeId\": {\n          \"type\": \"string\"\n        },\n        \"firstName\": {\n          \"type\": \"string\"\n        },\n        \"lastName\": {\n          \"type\": \"string\"\n        }\n      },\n      \"title\": \"EmployeeInput\"\n    }\n  }\n}",
       "contentType": "yaml",
       "_type": "api_spec"
     },
     {
-      "_id": "env_env_58653a7b66336dadc9f3a1123945a4473b9e54e3_sub",
-      "parentId": "env_58653a7b66336dadc9f3a1123945a4473b9e54e3",
-      "modified": 1671729338493,
-      "created": 1671729338493,
-      "name": "Swagger env",
+      "_id": "env_env_e0f5e8bf471d3d3353b17beafb60e561e53ce8ad_sub",
+      "parentId": "env_e0f5e8bf471d3d3353b17beafb60e561e53ce8ad",
+      "modified": 1672459508267,
+      "created": 1671994743472,
+      "name": "OpenAPI env",
       "data": {
-        "base_path": "/",
-        "scheme": "http",
-        "host": "localhost:8080"
+        "scheme": [
+          "http"
+        ],
+        "host": "localhost:8080",
+        "id": "a735b69d-d6e9-45af-a876-3f3a545ea612"
       },
-      "dataPropertyOrder": null,
+      "dataPropertyOrder": {
+        "&": [
+          "scheme",
+          "host",
+          "id"
+        ]
+      },
       "color": null,
       "isPrivate": false,
-      "metaSortKey": 1671729338493,
+      "metaSortKey": 1671994743472,
       "_type": "environment"
     }
   ]

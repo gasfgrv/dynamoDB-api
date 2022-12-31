@@ -4,155 +4,137 @@ package br.com.gusta.dynamodb.domain.service;
 import br.com.gusta.dynamodb.domain.exception.EmployeeException;
 import br.com.gusta.dynamodb.domain.model.Employee;
 import br.com.gusta.dynamodb.domain.repository.EmployeeRepository;
-import br.com.gusta.dynamodb.mocks.EmployeeMock;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import br.com.gusta.dynamodb.mocks.MockUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.times;
+import static org.mockito.BDDMockito.verify;
+
+@Profile("test")
 @ExtendWith({SpringExtension.class, OutputCaptureExtension.class})
 class EmployeeServiceTest {
-
-    private static String EMPLOYEE_ID;
-    private static Employee EMPLOYEE;
-    @Mock
-    private EmployeeRepository employeeRepository;
 
     @InjectMocks
     private EmployeeService employeeService;
 
+    @Mock
+    private EmployeeRepository employeeRepository;
+
+    private String employeeId;
+
+    private Employee employee;
+
     @BeforeEach
     void initTest() {
-        EMPLOYEE_ID = EmployeeMock.get().getEmployeeId();
-        EMPLOYEE = EmployeeMock.get();
+        employeeId = MockUtils.getEmployeeEntity().getEmployeeId();
+        employee = MockUtils.getEmployeeEntity();
     }
 
     @Test
     void saveTest(CapturedOutput output) {
-        doReturn(EMPLOYEE)
-                .when(employeeRepository)
-                .save(EMPLOYEE);
+        given(employeeRepository.save(employee)).willReturn(employee);
 
-        assertThat(employeeService.save(EMPLOYEE))
+        assertThat(employeeService.save(employee))
                 .usingRecursiveComparison()
-                .isEqualTo(EMPLOYEE);
+                .isEqualTo(employee);
 
-        assertThat(output.getOut())
-                .contains(String.format("Employee %s was saved in DynamoDB", EMPLOYEE_ID));
+        assertThat(output.getOut()).contains(String.format("Employee %s was saved in DynamoDB", employeeId));
+
+        verify(employeeRepository, times(1)).save(employee);
     }
 
     @Test
     void getEmployeeByIdTest() {
-        doReturn(EMPLOYEE)
-                .when(employeeRepository)
-                .getEmployeeById(EMPLOYEE_ID);
+        given(employeeRepository.getEmployeeById(employeeId)).willReturn(employee);
 
-        assertThatCode(() ->
-                assertThat(employeeService.getEmployeeById(EMPLOYEE_ID))
-                        .usingRecursiveComparison()
-                        .isEqualTo(EMPLOYEE)
-        ).doesNotThrowAnyException();
+        assertThatCode(() -> assertThat(employeeService.getEmployeeById(employeeId))
+                .usingRecursiveComparison()
+                .isEqualTo(employee))
+                .doesNotThrowAnyException();
 
-        verify(employeeRepository, times(1))
-                .getEmployeeById(EMPLOYEE_ID);
+        verify(employeeRepository, times(1)).getEmployeeById(employeeId);
     }
 
     @Test
     void getEmployeeByIdThrowingExceptionTest() {
-        doReturn(null)
-                .when(employeeRepository)
-                .getEmployeeById(EMPLOYEE_ID);
+        given(employeeRepository.getEmployeeById(employeeId)).willReturn(null);
 
         assertThatExceptionOfType(EmployeeException.class)
-                .isThrownBy(() -> employeeService.getEmployeeById(EMPLOYEE_ID))
+                .isThrownBy(() -> employeeService.getEmployeeById(employeeId))
                 .isInstanceOf(RuntimeException.class)
                 .withMessage("This employee doesn't exists");
 
-        verify(employeeRepository, times(1))
-                .getEmployeeById(EMPLOYEE_ID);
+        verify(employeeRepository, times(1)).getEmployeeById(employeeId);
     }
 
     @Test
     void deleteTest(CapturedOutput output) {
-        doReturn(EMPLOYEE)
-                .when(employeeRepository)
-                .getEmployeeById(EMPLOYEE_ID);
+        given(employeeRepository.getEmployeeById(employeeId)).willReturn(employee);
 
-        assertThatCode(() -> employeeService.delete(EMPLOYEE))
-                .doesNotThrowAnyException();
+        assertThatCode(() -> employeeService.delete(employeeId)).doesNotThrowAnyException();
 
-        verify(employeeRepository, times(1))
-                .getEmployeeById(EMPLOYEE_ID);
+        assertThat(output.getOut()).contains(String.format("Employee %s was deleted data in DynamoDB", employeeId));
 
-        verify(employeeRepository, times(1))
-                .delete(any(Employee.class));
+        verify(employeeRepository, times(1)).getEmployeeById(employeeId);
 
-        assertThat(output.getOut())
-                .contains(String.format("Employee %s was deleted data in DynamoDB", EMPLOYEE_ID));
+        verify(employeeRepository, times(1)).delete(any(Employee.class));
     }
 
     @Test
     void deleteThrowingExceptionTest() {
-        doReturn(null)
-                .when(employeeRepository)
-                .getEmployeeById(EMPLOYEE_ID);
+        given(employeeRepository.getEmployeeById(employeeId)).willReturn(null);
 
         assertThatExceptionOfType(EmployeeException.class)
-                .isThrownBy(() -> employeeService.delete(EMPLOYEE))
+                .isThrownBy(() -> employeeService.delete(employeeId))
                 .isInstanceOf(RuntimeException.class)
-                .withMessage("This employee can't be delected");
+                .withMessage("This employee can't be deleted");
 
-        verify(employeeRepository, times(1))
-                .getEmployeeById(EMPLOYEE_ID);
+        verify(employeeRepository, times(1)).getEmployeeById(employeeId);
     }
 
     @Test
     void updateTest(CapturedOutput output) {
-        doReturn(EMPLOYEE)
-                .when(employeeRepository).getEmployeeById(EMPLOYEE_ID);
+        employee.setEmail("novo_email@email.com");
 
-        EMPLOYEE.setEmail("novo_email@email.com");
+        given(employeeRepository.getEmployeeById(employeeId)).willReturn(employee);
 
-        assertThatCode(() -> assertThat(employeeService.update(EMPLOYEE_ID, EMPLOYEE))
+        assertThatCode(() -> assertThat(employeeService.update(employeeId, employee))
                 .usingDefaultComparator()
                 .hasFieldOrPropertyWithValue("email", "novo_email@email.com")
-                .isNotEqualTo(EMPLOYEE.getEmail())
-        ).doesNotThrowAnyException();
+                .isNotEqualTo(employee.getEmail()))
+                .doesNotThrowAnyException();
 
-        verify(employeeRepository, times(1))
-                .getEmployeeById(EMPLOYEE_ID);
+        assertThat(output.getOut()).contains(String.format("Employee %s was update data in DynamoDB", employeeId));
 
-        verify(employeeRepository, times(1))
-                .update(anyString(), any(Employee.class));
+        verify(employeeRepository, times(1)).getEmployeeById(employeeId);
 
-        assertThat(output.getOut())
-                .contains(String.format("Employee %s was update data in DynamoDB", EMPLOYEE_ID));
+        verify(employeeRepository, times(1)).update(anyString(), any(Employee.class));
     }
 
     @Test
     void updateThrowingExceptionTest() {
-        doReturn(null)
-                .when(employeeRepository).getEmployeeById(EMPLOYEE_ID);
+        given(employeeRepository.getEmployeeById(employeeId)).willReturn(null);
 
         assertThatExceptionOfType(EmployeeException.class)
-                .isThrownBy(() -> employeeService.update(EMPLOYEE_ID, EMPLOYEE))
+                .isThrownBy(() -> employeeService.update(employeeId, employee))
                 .isInstanceOf(RuntimeException.class)
                 .withMessage("This employee can't update his data");
 
-        verify(employeeRepository, times(1))
-                .getEmployeeById(EMPLOYEE_ID);
+        verify(employeeRepository, times(1)).getEmployeeById(employeeId);
     }
 
 }

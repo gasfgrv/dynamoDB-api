@@ -19,13 +19,12 @@ jobs:
         run: mvn -B clean package -DskipTests --file pom.xml
       - name: docker build
         run: docker build -t gustosilva/dynamodb-api .
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+        run: docker login -u $DOCKER_USER -p $DOCKER_TOKEN
 
-
-#      - name: docker login
-#        env:
-#          DOCKER_USER: ${{secrets.DOCKER_USER}}
-#          DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
-#        run: docker login -u $DOCKER_USER -p $DOCKER_TOKEN
 #      - name: docker build
 #        run: docker build --file Dockerfile --tag gustosilva/dynamodb-api:$(date +%s) .
 #      - name: docker push

@@ -26,8 +26,7 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_TOKEN
       - name: docker tag
         run: docker tag $(docker images --filter=reference='gustosilva/dynamodb-api' --format "{{.ID}}") gustosilva/dynamodb-api
-
-#      - name: docker build
-#        run: docker build --file Dockerfile --tag gustosilva/dynamodb-api:$(date +%s) .
-#      - name: docker push
-#        run: docker push gustosilva/dynamodb-api
+      - name: docker push
+        run: docker push gustosilva/dynamodb-api
+      - name: docker logout
+        run: docker logout

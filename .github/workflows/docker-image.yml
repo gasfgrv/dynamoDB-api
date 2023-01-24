@@ -16,14 +16,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B clean package -DskipTests --file pom.xml    
-    - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_TOKEN
-    - name: docker build
-      run: docker build . --file Dockerfile --tag gustosilva/dynamodb-api:$(date +%s)
-    - name: docker push
-      run: docker push gustosilva/dynamodb-api
+      run: mvn clean package -DskipTests --file pom.xml    
+    - name: Docker Login
+      uses: docker/login-action@v2.1.0
+      with:  
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_TOKEN }}

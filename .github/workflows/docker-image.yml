@@ -16,7 +16,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_TOKEN
     - name: docker build
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/dynamodb-api:$(docker images --filter=reference='gustosilva/dynamodb-api' --format "{{.ID}}")
+      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/dynamodb-api:$(date +%s)
     - name: docker push
       run: docker push ${{secrets.DOCKER_USER}}/dynamodb-api
       

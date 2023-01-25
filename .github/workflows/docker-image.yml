@@ -16,7 +16,19 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Gerar .jar
-        run: mvn -B clean package -DskipTests --file pom.xml
+        env:
+          SERVICE_ENDPOINT: ${{secrets.SERVICE_ENDPOINT}}
+          SIGNING_REGION: ${{secrets.SIGNING_REGION}}
+          ACCESS_KEY: ${{secrets.ACCESS_KEY}}
+          SECRET_KEY: ${{secrets.SECRET_KEY}}
+        run: |
+          mvn -B clean package \
+          -Dspring.profiles.active=test \
+          -Ddynamo.serviceEndpoint=$SERVICE_ENDPOINT \
+          -Ddynamo.signingRegion=$SIGNING_REGION \
+          -Ddynamo.accessKey=$ACCESS_KEY \
+          -Ddynamo.secretKey=$SECRET_KEY \
+          --file pom.xml
       - name: docker build
         run: docker build -t gustosilva/dynamodb-api .
       - name: docker login

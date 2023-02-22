@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dynamo-api:
+    container_name: dynamo-api
+    image: gustosilva/dynamodb-api:latest
+    ports:
+      - "80:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 700M
+        reservations:
+          memory: 700M
+    restart: always

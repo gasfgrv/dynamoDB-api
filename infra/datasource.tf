@@ -1,4 +1,4 @@
-data "aws_ami" "contactbook_server_ami" {
+data "aws_ami" "api_ami" {
   most_recent = true
   owners      = ["099720109477"]
 

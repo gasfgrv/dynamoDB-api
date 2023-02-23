@@ -50,7 +50,7 @@ resource "aws_route_table_association" "api_route_table_association" {
 
 resource "aws_instance" "api_instance" {
   instance_type          = "t2.micro"
-  ami                    = data.aws_ami.contactbook_server_ami.id
+  ami                    = data.aws_ami.api_ami.id
   key_name               = aws_key_pair.api_key_pair.id
   vpc_security_group_ids = [aws_security_group.api_security_group.id]
   subnet_id              = aws_subnet.api_subnet.id
@@ -61,6 +61,6 @@ resource "aws_instance" "api_instance" {
   }
 
   tags = {
-    "Name" = "contactbook_ec2_inst"
+    "Name" = "api_ec2_inst"
   }
 }

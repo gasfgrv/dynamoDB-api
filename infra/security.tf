@@ -1,10 +1,10 @@
 resource "aws_security_group" "api_security_group" {
-  name        = "contactbook_sg"
-  description = "contactbook security group"
+  name        = "api_sg"
+  description = "api security group"
   vpc_id      = aws_vpc.api_vpc.id
 
   tags = {
-    "Name" = "contactbook_sg"
+    "Name" = "api_sg"
   }
 }
 

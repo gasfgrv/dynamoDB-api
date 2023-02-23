@@ -14,7 +14,4 @@ sudo sudo apt-get install docker-ce docker-ce-cli containerd.io -y &&
 sudo usermod -aG docker ubuntu
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
-
 docker pull gustosilva/dynamodb-api:latest
-
-docker run --env ACCESS_KEY=ACCESS_KEY --env SECRET_KEY=SECRET_KEY --env SERVICE_ENDPOINT=SERVICE_ENDPOINT --env SIGNING_REGION=SIGNING_REGION -p 80:8080 gustosilva/dynamodb-api:latest

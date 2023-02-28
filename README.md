@@ -7,13 +7,13 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
 - [Features](#features)
 - [Contrato da API](#contrato-da-api)
 - [Endpoints da Aplicação](#endpoints-da-aplicação)
-  - [/employee](#employee)
+  - [/v1/employees](#employee)
     - [POST](#post)
       - [Summary:](#summary)
       - [Description:](#description)
       - [Parameters](#parameters)
       - [Responses](#responses)
-  - [/employee/{id}](#employeeid)
+  - [/v1/employees/{id}](#employeeid)
     - [GET](#get)
       - [Summary:](#summary-1)
       - [Description:](#description-1)
@@ -74,7 +74,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
     }
   ],
   "paths": {
-    "/employee": {
+    "/v1/employees": {
       "post": {
         "tags": [
           "employee-controller"
@@ -95,7 +95,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
             "description": "Form for creation of user",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmployeeInput"
+              "$ref": "#/definitions/v1/employeesInput"
             }
           }
         ],
@@ -103,7 +103,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Employee"
+              "$ref": "#/definitions/v1/employees"
             }
           },
           "201": {
@@ -122,7 +122,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
         "deprecated": false
       }
     },
-    "/employee/{id}": {
+    "/v1/employees/{id}": {
       "get": {
         "tags": [
           "employee-controller"
@@ -146,7 +146,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/EmployeeDto"
+              "$ref": "#/definitions/v1/employeesDto"
             }
           },
           "401": {
@@ -181,7 +181,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
             "description": "Form to update user",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmployeeInput"
+              "$ref": "#/definitions/v1/employeesInput"
             }
           },
           {
@@ -196,7 +196,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/EmployeeDto"
+              "$ref": "#/definitions/v1/employeesDto"
             }
           },
           "201": {
@@ -333,7 +333,7 @@ API feita para testar a integração do Spring boot com o AWS DynamoDB.
 
 ## Endpoints da Aplicação
 
-### /employee
+### /v1/employees
 
 #### POST
 
@@ -361,7 +361,7 @@ Saves a new employee in dynamoDB
 | 403  | Forbidden    |                       |
 | 404  | Not Found    |                       |
 
-### /employee/{id}
+### /v1/employees/{id}
 
 #### GET
 

@@ -40,7 +40,7 @@ class DynamoDbApiApplicationIntegrationTest {
     void saveEmployeeTest(CapturedOutput output) throws Exception {
         var employeeInput = MockUtils.getEmployeeInput();
 
-        mockMvc.perform(post("/employee")
+        mockMvc.perform(post("/v1/employees")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                         .content(MockUtils.getJson(employeeInput)))
                 .andExpect(status().isOk());
@@ -54,7 +54,7 @@ class DynamoDbApiApplicationIntegrationTest {
         var employeeInput = MockUtils.getEmployeeInput();
         employeeInput.setEmployeeId(null);
 
-        mockMvc.perform(post("/employee")
+        mockMvc.perform(post("/v1/employees")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                         .content(MockUtils.getJson(employeeInput)))
                 .andExpect(status().isOk());
@@ -68,7 +68,7 @@ class DynamoDbApiApplicationIntegrationTest {
         var employeeInput = MockUtils.getEmployeeInput();
         employeeInput.setFirstName("");
 
-        mockMvc.perform(post("/employee")
+        mockMvc.perform(post("/v1/employees")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                         .content(MockUtils.getJson(employeeInput)))
                 .andExpect(status().isBadRequest())
@@ -84,7 +84,7 @@ class DynamoDbApiApplicationIntegrationTest {
         var employeeInput = MockUtils.getEmployeeInput();
         employeeInput.setEmail("application/json");
 
-        mockMvc.perform(post("/employee")
+        mockMvc.perform(post("/v1/employees")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                         .content(MockUtils.getJson(employeeInput)))
                 .andExpect(status().isBadRequest())
@@ -100,7 +100,7 @@ class DynamoDbApiApplicationIntegrationTest {
         var employeeInput = MockUtils.getEmployeeInput();
         employeeInput.setDepartment(null);
 
-        mockMvc.perform(post("/employee")
+        mockMvc.perform(post("/v1/employees")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                         .content(MockUtils.getJson(employeeInput)))
                 .andExpect(status().isBadRequest())
@@ -116,7 +116,7 @@ class DynamoDbApiApplicationIntegrationTest {
         var employee = MockUtils.getEmployeeEntity();
         var employeeId = employee.getEmployeeId();
 
-        mockMvc.perform(get("/employee/{id}", employeeId)
+        mockMvc.perform(get("/v1/employees/{id}", employeeId)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value(employee.getEmail()));
@@ -129,7 +129,7 @@ class DynamoDbApiApplicationIntegrationTest {
     void getEmployeeThrowingExceptionTest(CapturedOutput output) throws Exception {
         var employeeId = UUID.randomUUID().toString();
 
-        mockMvc.perform(get("/employee/{id}", employeeId)
+        mockMvc.perform(get("/v1/employees/{id}", employeeId)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.title").value("This employee doesn't exists"));
@@ -145,7 +145,7 @@ class DynamoDbApiApplicationIntegrationTest {
         var employeeInput = MockUtils.getEmployeeInput();
         employeeInput.setEmail(newEmail);
 
-        mockMvc.perform(put("/employee/{id}", employeeId)
+        mockMvc.perform(put("/v1/employees/{id}", employeeId)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                         .content(MockUtils.getJson(employeeInput)))
                 .andExpect(status().isOk())
@@ -160,7 +160,7 @@ class DynamoDbApiApplicationIntegrationTest {
         var employeeId = UUID.randomUUID().toString();
         var employeeInput = MockUtils.getEmployeeInput();
 
-        mockMvc.perform(put("/employee/{id}", employeeId)
+        mockMvc.perform(put("/v1/employees/{id}", employeeId)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                         .content(MockUtils.getJson(employeeInput)))
                 .andExpect(status().isBadRequest())
@@ -174,7 +174,7 @@ class DynamoDbApiApplicationIntegrationTest {
     void deleteEmployeeTest(CapturedOutput output) throws Exception {
         var employeeId = MockUtils.getEmployeeEntity().getEmployeeId();
 
-        mockMvc.perform(delete("/employee/{id}", employeeId)
+        mockMvc.perform(delete("/v1/employees/{id}", employeeId)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
@@ -186,7 +186,7 @@ class DynamoDbApiApplicationIntegrationTest {
     void deleteThrowingExceptionTest(CapturedOutput output) throws Exception {
         var employeeId = UUID.randomUUID().toString();
 
-        mockMvc.perform(delete("/employee/{id}", employeeId)
+        mockMvc.perform(delete("/v1/employees/{id}", employeeId)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.title").value("This employee can't be deleted"));

@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: dynamoDB-API
+  mvc:
+    apiversion:
+      use:
+        path-segment: 0
+      supported: v1
+      default: v1
+
+server:
+  port: 8080
+
+aws:
+  dynamo:
+    service-endpoint: ${SERVICE_ENDPOINT:http://localhost:4566}
+    region: ${REGION:us-east-1}
+    access-key: ${ACCESS_KEY}
+    secret-key: ${SECRET_KEY}
+
+springdoc:
+  api-docs:
+    path: /v1/docs
+  swagger-ui:
+    path: /v1/docs/ui
+    operationsSorter: method

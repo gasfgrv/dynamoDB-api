@@ -1,0 +1,172 @@
+type: collection.insomnia.rest/5.0
+name: Employees (Dynamo)
+meta:
+  id: wrk_b30de6db68c8416a9ac14aa64e63ff15
+  created: 1768102267297
+  modified: 1768102267297
+  description: ""
+collection:
+  - url: http://localhost:8080/v1/docs
+    name: Swagger Doc
+    meta:
+      id: req_3bd3c7dfe16846798589665875b721c3
+      created: 1768102278849
+      modified: 1768102302125
+      isPrivate: false
+      description: ""
+      sortKey: -1768102278849
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/v1/docs/ui
+    name: Swagger UI
+    meta:
+      id: req_63406ad8b74b4c8a828dbc59e80c0f91
+      created: 1768102653930
+      modified: 1768102718821
+      isPrivate: false
+      description: ""
+      sortKey: -1767521349638.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/v1/employees
+    name: New Employee
+    meta:
+      id: req_130e863573ae4d86b831b0caf7997809
+      created: 1768107586074
+      modified: 1768107902365
+      isPrivate: false
+      description: ""
+      sortKey: -1768107586074
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"employee_id": "{% uuid 'v4' %}",
+        	"first_name": "Jhon",
+        	"last_name": "Doe",
+        	"email": "{% faker 'randomExampleEmail' %}",
+        	"department_name":"IT",
+        	"department_code":"DPT-001"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/v1/employees/a03d5b56-8c26-4b03-8f4d-0b0608399d8a
+    name: Get Employee
+    meta:
+      id: req_4c0db038050e497989c35e41a354249b
+      created: 1768109261769
+      modified: 1768109303996
+      isPrivate: false
+      description: ""
+      sortKey: -1768109261769
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/v1/employees/a03d5b56-8c26-4b03-8f4d-0b0608399d8a
+    name: Update Employee
+    meta:
+      id: req_51d66058115c4c7fb2e759b061e324b9
+      created: 1768109815765
+      modified: 1768109982169
+      isPrivate: false
+      description: ""
+      sortKey: -1768104932461.5
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"first_name": "Jhon",
+        	"last_name": "Doe",
+        	"email": "{% faker 'randomExampleEmail' %}",
+        	"department_name":"HR",
+        	"department_code":"DPT-002"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/v1/employees/d778ff31-b5ea-4843-b992-b5245e20c177
+    name: Delete Employee
+    meta:
+      id: req_4aec22d2913446e7b3356bcbe0118c8a
+      created: 1768110531212
+      modified: 1768110769880
+      isPrivate: false
+      description: ""
+      sortKey: -1768108423921.5
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_daa0694228544830d8d78deb3c3b862c6fd2d3ff
+    created: 1768102267332
+    modified: 1768102267332
+environments:
+  name: Base Environment
+  meta:
+    id: env_daa0694228544830d8d78deb3c3b862c6fd2d3ff
+    created: 1768102267311
+    modified: 1768102267311
+    isPrivate: false
